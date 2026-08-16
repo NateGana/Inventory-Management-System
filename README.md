@@ -1,4 +1,4 @@
-# Dabao Plus — PHP + MySQL Edition
+# Dabao Plus — PHP + MySQL 
 ### Setup Guide for XAMPP
 
 ---
