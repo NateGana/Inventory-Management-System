@@ -1,49 +1,59 @@
-# Dabao Plus — PHP + MySQL 
-### Setup Guide for XAMPP
+<div align="center">
+
+# 🥡 Dabao Plus
+
+**Full-Stack Inventory & Transaction Management System**
+
+[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![XAMPP](https://img.shields.io/badge/XAMPP-FB7A24?style=for-the-badge&logo=apachefriends&logoColor=white)](https://www.apachefriends.org/)
+
+<p align="center">
+  <b>Welcome to Dabao Plus!</b> This repository contains a complete, database-backed inventory management system. Feel free to clone, set up locally on XAMPP, and explore the features!
+</p>
+
+</div>
 
 ---
 
-## 1. Start XAMPP
+## 🚀 Quick Setup Guide (XAMPP)
 
-Open XAMPP Control Panel and start both **Apache** and **MySQL**.
+Follow these simple steps to run **Dabao Plus** on your local machine:
 
----
+### 1. Start XAMPP
+Open your **XAMPP Control Panel** and start both **Apache** and **MySQL**.
 
-## 2. Import the Database
+### 2. Import the Database
+1. Open your browser and go to `http://localhost/phpmyadmin`
+2. Click **Import** in the top navigation bar.
+3. Click **Choose File** and select `dabaoplus.sql` (located in the root of this repository).
+4. Scroll to the bottom and click **Go**.
+5. Once complete, you will see *"Import has been successfully finished"*. This creates the `dabaoplus` database populated with all required tables and demo data.
 
-1. Open your browser and go to: **http://localhost/phpmyadmin**
-2. Click **Import** in the top menu bar.
-3. Click **Choose File** and select `dabaoplus.sql` (in this folder).
-4. Scroll down and click **Go**.
-5. You should see: *"Import has been successfully finished"*
+### 3. Move Files to `htdocs`
+Copy the entire `dabaoplus/` folder into your XAMPP `htdocs` directory according to your OS:
 
-This creates the `dabaoplus` database with all tables and demo data.
+| Operating System | Default `htdocs` Path |
+| :--- | :--- |
+| **Windows** | `C:\xampp\htdocs\dabaoplus\` |
+| **macOS** | `/Applications/XAMPP/htdocs/dabaoplus/` |
+| **Linux** | `/opt/lampp/htdocs/dabaoplus/` |
 
----
+#### 📂 Project Directory Structure
+Ensure your folder layout matches the following setup:
 
-## 3. Copy Files to XAMPP
-
-Copy the entire **`dabaoplus/`** folder into your XAMPP `htdocs` directory:
-
-| OS      | Path                              |
-|---------|-----------------------------------|
-| Windows | `C:\xampp\htdocs\dabaoplus\`      |
-| Mac     | `/Applications/XAMPP/htdocs/dabaoplus/` |
-| Linux   | `/opt/lampp/htdocs/dabaoplus/`    |
-
-Your final folder structure should look like:
-
-```
+```text
 htdocs/
 └── dabaoplus/
-    ├── index.php          ← main app entry point
-    ├── dabaoplus.sql      ← database import file
+    ├── index.php          ← Main application entry point
+    ├── dabaoplus.sql      ← Database import file
     ├── includes/
-    │   ├── db.php         ← database connection
-    │   └── auth.php       ← session helpers
+    │   ├── db.php         ← Database connection configuration
+    │   └── auth.php       ← Session helper utilities
     ├── api/
-    │   ├── auth.php       ← login / logout / session / PIN
-    │   ├── items.php      ← inventory CRUD
+    │   ├── auth.php       ← Authentication, session & PIN verification
+    │   ├── items.php      ← Inventory CRUD operations
     │   ├── transactions.php
     │   ├── users.php
     │   ├── dashboard.php
@@ -51,7 +61,7 @@ htdocs/
     ├── css/
     │   └── style.css
     └── js/
-        ├── api.js          ← replaces localStorage Store
+        ├── api.js          ← API adapter (replaces old localStorage Store)
         ├── UIHelpers.js
         ├── RenderDashboard.js
         ├── RenderInventory.js
@@ -66,52 +76,3 @@ htdocs/
         ├── InventoryItem.js
         ├── Transaction.js
         └── User.js
-```
-
----
-
-## 4. (Optional) Change Database Credentials
-
-If your MySQL has a password set, open `includes/db.php` and update:
-
-```php
-define('DB_USER', 'root');
-define('DB_PASS', '');   // ← put your password here
-```
-
----
-
-## 5. Open the App
-
-Go to: **http://localhost/dabaoplus/**
-
----
-
-## Demo Login Accounts
-
-| Email                      | Password  | Role     |
-|----------------------------|-----------|----------|
-| demoadmin@login.com        | admin123  | Admin    |
-| demostaff@login.com        | staff123  | Staff    |
-| demosupplier@login.com     | sup123    | Supplier |
-
-**Manage Accounts PIN:** `5678`
-
----
-
-## What Changed from the Original
-
-| Before (localStorage)       | After (PHP + MySQL)                     |
-|-----------------------------|------------------------------------------|
-| `Store.js` + localStorage   | `api.js` → PHP API endpoints → MySQL    |
-| `SeedData.js` (JS seed)     | `dabaoplus.sql` (SQL seed via phpMyAdmin)|
-| Client-side session         | PHP `$_SESSION` (server-side)            |
-| All data lost on clear cache| Data persists in MySQL permanently       |
-
----
-
-## Notes
-
-- Passwords are stored in plain text to match the original app's behavior.
-  For production use, replace with `password_hash()` / `password_verify()`.
-- The PIN (`5678`) is hardcoded in `api/auth.php` — change it there if needed.
